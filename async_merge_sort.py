@@ -52,13 +52,15 @@ async def task_function(input_array):
     for file in files:
         tasks.append(asyncio.create_task(get_array_from_file(path,file,input_array)))
     await asyncio.wait(tasks)  
-      
-start_time=time.time()
-input_array=[]
-loop = asyncio.get_event_loop()
-loop.run_until_complete(task_function(input_array))
-write_to_file(mergesort(input_array))
-f=open('async_time.txt',"a")
-f.write(f'\n{datetime.now()}\t---{time.time()-start_time}---\n')   
-f.close()
-loop.close()
+def main():      
+    start_time=time.time()
+    input_array=[]
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(task_function(input_array))
+    write_to_file(mergesort(input_array))
+    f=open('async_time.txt',"a")
+    f.write(f'\n{datetime.now()}\t---{time.time()-start_time}---\n')   
+    f.close()
+    loop.close()
+if __name__=="__main__":
+    main()
